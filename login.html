@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Team Login</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: radial-gradient(circle,#0f0c29,#090116);
+  font-family:"Segoe UI";
+  color:white;
+}
+
+.card{
+  width:420px;
+  padding:30px;
+  border-radius:20px;
+  background:#140a28;
+  border:1px solid #7c3aed;
+  box-shadow:0 0 25px rgba(168,85,247,0.3);
+  text-align:center;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #7c3aed;
+  background:#0b0420;
+  color:white;
+}
+
+button{
+  margin-top:15px;
+  padding:12px;
+  width:100%;
+  border:none;
+  border-radius:10px;
+  background:#7c3aed;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h2>🎮 Team Login</h2>
+
+<input id="team" placeholder="Team Name">
+
+<input id="m1" placeholder="Member 1">
+<input id="m2" placeholder="Member 2">
+<input id="m3" placeholder="Member 3">
+<input id="m4" placeholder="Member 4">
+
+<button onclick="start()">Start Mission</button>
+<p id="msg"></p>
+</div>
+
+<script>
+function start(){
+ let team=document.getElementById("team").value.trim();
+ let m1=document.getElementById("m1").value.trim();
+ let m2=document.getElementById("m2").value.trim();
+ let m3=document.getElementById("m3").value.trim();
+ let m4=document.getElementById("m4").value.trim();
+
+ if(!team||!m1||!m2||!m3||!m4){
+  msg.innerText="⚠️ Fill all details";
+  return;
+ }
+
+ // Save data
+ localStorage.setItem("team",team);
+ localStorage.setItem("members",JSON.stringify([m1,m2,m3,m4]));
+
+ // go to mission
+ window.location.href="story.html";
+}
+</script>
+
+</body>
+</html>

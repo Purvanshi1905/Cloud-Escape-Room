@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Leaderboard</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Segoe UI";
+  background: radial-gradient(circle,#140a28,#05010d);
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* TITLE */
+.title{
+  font-size:40px;
+  margin-top:20px;
+  color:#c084fc;
+  text-shadow:0 0 20px #a855f7;
+}
+
+/* PODIUM */
+.podium{
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  margin-top:50px;
+  gap:30px;
+}
+
+/* PODIUM BLOCK */
+.block{
+  width:120px;
+  border-radius:10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:center;
+  padding:10px;
+  animation: rise 1.5s ease;
+}
+
+/* HEIGHTS */
+.first{ height:220px; background:linear-gradient(#ffd700,#b8860b);}
+.second{ height:170px; background:linear-gradient(#c0c0c0,#808080);}
+.third{ height:140px; background:linear-gradient(#cd7f32,#8b4513);}
+
+/* TEAM NAME */
+.team{
+  margin-bottom:10px;
+  font-weight:bold;
+}
+
+/* MEDAL */
+.medal{
+  font-size:30px;
+  margin-bottom:5px;
+}
+
+/* ANIMATION */
+@keyframes rise{
+  from{transform:translateY(200px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
+}
+
+/* TABLE */
+.table{
+  margin:50px auto;
+  width:80%;
+  border-collapse:collapse;
+}
+
+.table th, .table td{
+  padding:12px;
+  border-bottom:1px solid rgba(168,85,247,0.3);
+}
+
+.table th{
+  color:#c084fc;
+}
+
+/* CONFETTI */
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  background:#c084fc;
+  top:0;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall{
+  to{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="title">🏆 LEADERBOARD</div>
+
+<!-- PODIUM -->
+<div class="podium">
+
+  <div class="block second">
+    <div class="medal">🥈</div>
+    <div class="team" id="team2">---</div>
+  </div>
+
+  <div class="block first">
+    <div class="medal">🥇</div>
+    <div class="team" id="team1">---</div>
+  </div>
+
+  <div class="block third">
+    <div class="medal">🥉</div>
+    <div class="team" id="team3">---</div>
+  </div>
+
+</div>
+
+<!-- FULL TABLE -->
+<table class="table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Team</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody id="leaderboardBody"></tbody>
+</table>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT",
+  messagingSenderId: "XXX",
+  appId: "XXX"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadLeaderboard(){
+  const q = query(collection(db,"teams"), orderBy("time"));
+  const snapshot = await getDocs(q);
+
+  let teams = [];
+  snapshot.forEach(doc=>{
+    teams.push(doc.data());
+  });
+
+  /* PODIUM */
+  if(teams[0]) document.getElementById("team1").innerText = teams[0].name;
+  if(teams[1]) document.getElementById("team2").innerText = teams[1].name;
+  if(teams[2]) document.getElementById("team3").innerText = teams[2].name;
+
+  /* TABLE */
+  let html="";
+  teams.forEach((t,i)=>{
+    html+=`
+      <tr>
+        <td>${i+1}</td>
+        <td>${t.name}</td>
+        <td>${t.time}s</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("leaderboardBody").innerHTML=html;
+}
+
+loadLeaderboard();
+</script>
+
+<!-- CONFETTI SCRIPT -->
+<script>
+function createConfetti(){
+  for(let i=0;i<40;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(c);
+  }
+}
+
+createConfetti();
+</script>
+
+</body>
+</html>

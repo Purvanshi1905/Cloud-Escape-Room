@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AWS Briefing</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Segoe UI";
+  background: radial-gradient(circle,#140a28,#05010d);
+  color:white;
+  text-align:center;
+  padding:30px;
+}
+
+/* TITLE */
+.title{
+  font-size:42px;
+  margin-bottom:10px;
+  color:#c084fc;
+  text-shadow:0 0 20px #a855f7;
+}
+
+.subtitle{
+  margin-bottom:40px;
+  opacity:0.8;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+  max-width:1000px;
+  margin:auto;
+}
+
+/* CARD */
+.card{
+  perspective:1000px;
+  cursor:pointer;
+}
+
+.inner{
+  position:relative;
+  width:100%;
+  height:200px;
+  transition:transform 0.8s;
+  transform-style:preserve-3d;
+}
+
+.card.flipped .inner{
+  transform:rotateY(180deg);
+}
+
+/* FRONT & BACK */
+.front, .back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  backface-visibility:hidden;
+  box-shadow:0 0 20px rgba(168,85,247,0.5);
+}
+
+/* FRONT */
+.front{
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+  font-size:20px;
+  font-weight:bold;
+}
+
+/* BACK */
+.back{
+  background:#1a0933;
+  transform:rotateY(180deg);
+  padding:15px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+/* BUTTON */
+button{
+  margin-top:40px;
+  padding:15px 40px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(90deg,#7c3aed,#c084fc);
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(168,85,247,0.7);
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="title">☁ AWS BRIEFING</div>
+<div class="subtitle">Click cards to reveal mission-critical knowledge</div>
+
+<div class="grid">
+
+  <!-- EC2 -->
+  <div class="card" onclick="flip(this)">
+    <div class="inner">
+      <div class="front">EC2</div>
+      <div class="back">
+        Virtual servers in the cloud.<br><br>
+        Used to run applications, websites, and backend systems.
+      </div>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="card" onclick="flip(this)">
+    <div class="inner">
+      <div class="front">S3</div>
+      <div class="back">
+        Storage service for files, images, backups.<br><br>
+        Used for secure, scalable data storage.
+      </div>
+    </div>
+  </div>
+
+  <!-- Lambda -->
+  <div class="card" onclick="flip(this)">
+    <div class="inner">
+      <div class="front">Lambda</div>
+      <div class="back">
+        Serverless compute service.<br><br>
+        Runs code automatically without managing servers.
+      </div>
+    </div>
+  </div>
+
+  <!-- RDS -->
+  <div class="card" onclick="flip(this)">
+    <div class="inner">
+      <div class="front">RDS</div>
+      <div class="back">
+        Managed database service.<br><br>
+        Used for storing structured data like user info.
+      </div>
+    </div>
+  </div>
+
+  <!-- CloudFront -->
+  <div class="card" onclick="flip(this)">
+    <div class="inner">
+      <div class="front">CloudFront</div>
+      <div class="back">
+        Content Delivery Network (CDN).<br><br>
+        Delivers content faster globally.
+      </div>
+    </div>
+  </div>
+
+  <!-- IAM -->
+  <div class="card" onclick="flip(this)">
+    <div class="inner">
+      <div class="front">IAM</div>
+      <div class="back">
+        Identity and Access Management.<br><br>
+        Controls who can access resources securely.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<button onclick="goFinal()">🚀 PROCEED TO FINAL MISSION</button>
+
+<script>
+function flip(card){
+  card.classList.toggle("flipped");
+}
+
+function goFinal(){
+  document.body.style.opacity="0";
+  document.body.style.transition="0.5s";
+
+  setTimeout(()=>{
+    window.location.href="outro.html";
+  },600);
+}
+</script>
+
+</body>
+</html>

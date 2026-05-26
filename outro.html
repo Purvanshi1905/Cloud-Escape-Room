@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mission Complete</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: radial-gradient(circle,#140a28,#05010d);
+  font-family:"Segoe UI";
+  color:white;
+  text-align:center;
+  overflow:hidden;
+  animation: fadeIn 1.5s ease;
+}
+
+/* CONTAINER */
+.container{
+  max-width:800px;
+}
+
+/* TITLE */
+.title{
+  font-size:50px;
+  font-weight:bold;
+  color:#c084fc;
+  text-shadow:0 0 25px #a855f7;
+  animation: glow 2s infinite alternate;
+}
+
+/* MESSAGE */
+.message{
+  margin-top:25px;
+  font-size:20px;
+  line-height:1.8;
+  opacity:0.9;
+}
+
+/* HIGHLIGHT */
+.highlight{
+  margin-top:30px;
+  font-size:28px;
+  color:#ff00ff;
+  text-shadow:0 0 20px #ff00ff;
+  font-weight:bold;
+}
+
+/* CTA */
+.cta{
+  margin-top:25px;
+  font-size:20px;
+  color:#c084fc;
+}
+
+/* BUTTON */
+button{
+  margin-top:40px;
+  padding:15px 45px;
+  border:none;
+  border-radius:12px;
+  font-size:18px;
+  cursor:pointer;
+  background:linear-gradient(90deg,#7c3aed,#c084fc);
+  color:white;
+  box-shadow:0 0 20px rgba(168,85,247,0.8);
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 40px rgba(192,132,252,1);
+}
+
+/* ANIMATIONS */
+@keyframes glow{
+  from{ text-shadow:0 0 10px #a855f7;}
+  to{ text-shadow:0 0 40px #c084fc;}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="title">🎉 THAT’S THE FINALE</div>
+
+  <div class="message">
+    You’ve successfully completed the Cloud Escape Mission.<br><br>
+    
+    Thank you for participating in this experience.<br>
+    Your skills, logic, and teamwork brought you here.<br><br>
+
+    ⚡ Sit back and get ready… results are being calculated.
+  </div>
+
+  <div class="highlight">
+    TECHNORYX INTO AWS ☁
+  </div>
+
+  <div class="cta">
+    Are you ready to become a member?
+  </div>
+
+  <button onclick="goLeaderboard()">🏆 VIEW RESULTS</button>
+
+</div>
+
+<!-- SOUNDS -->
+<audio id="victory" src="https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3"></audio>
+<audio id="click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+
+<script>
+const victory = document.getElementById("victory");
+const click = document.getElementById("click");
+
+/* PLAY VICTORY SOUND */
+window.onload = ()=>{
+  victory.volume = 0.6;
+  victory.play();
+};
+
+/* GO TO LEADERBOARD */
+function goLeaderboard(){
+  click.play();
+
+  document.body.style.opacity="0";
+  document.body.style.transition="0.5s";
+
+  setTimeout(()=>{
+    window.location.href="leaderboard.html";
+  },600);
+}
+</script>
+
+</body>
+</html>

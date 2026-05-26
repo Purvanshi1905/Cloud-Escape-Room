@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Room 3 Incoming</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: radial-gradient(circle,#140a28,#05010d);
+  font-family:"Segoe UI";
+  color:white;
+  overflow:hidden;
+  animation: fadeIn 1.2s ease;
+}
+
+/* CONTAINER */
+.container{
+  text-align:center;
+  width:700px;
+}
+
+/* TITLE */
+.title{
+  font-size:50px;
+  font-weight:bold;
+  color:#c084fc;
+  text-shadow:0 0 20px #a855f7,0 0 40px #7c3aed;
+  animation: glow 2s infinite alternate;
+}
+
+/* MESSAGE */
+.message{
+  margin-top:25px;
+  font-size:20px;
+  line-height:1.6;
+  opacity:0.9;
+}
+
+/* BUTTON */
+button{
+  margin-top:40px;
+  padding:15px 40px;
+  border:none;
+  border-radius:12px;
+  font-size:18px;
+  cursor:pointer;
+  background:linear-gradient(90deg,#7c3aed,#a855f7);
+  color:white;
+  box-shadow:0 0 15px rgba(168,85,247,0.6);
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px rgba(192,132,252,1);
+}
+
+/* ANIMATIONS */
+@keyframes glow{
+  from{ text-shadow:0 0 10px #a855f7;}
+  to{ text-shadow:0 0 40px #c084fc;}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="title">ROOM 2 CLEARED</div>
+
+  <div class="message">
+    You made it this far... impressive.<br><br>
+    
+    But something is wrong.<br>
+    The system is no longer stable.<br><br>
+    
+    💻 Core functions are corrupted.<br>
+    Security layers are adapting.<br><br>
+    
+    This is not just a challenge anymore...
+  </div>
+
+  <button onclick="nextRoom()">⚡ I’M READY</button>
+</div>
+
+<!-- SOUNDS -->
+<audio id="winSound" src="https://assets.mixkit.co/active_storage/sfx/2059/2059-preview.mp3"></audio>
+<audio id="glitch" src="https://assets.mixkit.co/active_storage/sfx/2540/2540-preview.mp3"></audio>
+<audio id="click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+
+<script>
+const winSound = document.getElementById("winSound");
+const glitch = document.getElementById("glitch");
+const click = document.getElementById("click");
+
+/* PLAY SOUNDS ON LOAD */
+window.onload = ()=>{
+  winSound.volume = 0.5;
+  glitch.volume = 0.5;
+
+  winSound.play();
+  setTimeout(()=>glitch.play(),500);
+};
+
+/* BUTTON ACTION */
+function nextRoom(){
+  click.play();
+
+  document.body.style.transition="0.5s";
+  document.body.style.opacity="0";
+
+  setTimeout(()=>{
+    window.location.href="room3.html";
+  },700);
+}
+</script>
+
+</body>
+</html>

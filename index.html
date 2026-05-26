@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cloud Escape Room</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:"Segoe UI";
+  background: radial-gradient(circle at top,#140a28,#05010d);
+  overflow:hidden;
+  color:white;
+}
+
+/* PARTICLE BACKGROUND */
+canvas{
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:0;
+}
+
+/* MAIN CONTAINER */
+.container{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+/* BIG GAME TITLE */
+.title{
+  font-size:60px;
+  font-weight:bold;
+  color:#c084fc;
+  text-shadow:0 0 20px #a855f7, 0 0 40px #7c3aed;
+  animation: glow 2s infinite alternate;
+}
+
+/* GLITCH EFFECT */
+.title::before,
+.title::after{
+  content:"CLOUD ESCAPE ROOM";
+  position:absolute;
+  left:0;
+  right:0;
+}
+
+.title::before{
+  color:#ff00ff;
+  z-index:-1;
+  animation: glitch 2s infinite;
+}
+
+.title::after{
+  color:#00ffff;
+  z-index:-2;
+  animation: glitch2 2s infinite;
+}
+
+@keyframes glow{
+  from{ text-shadow:0 0 10px #a855f7;}
+  to{ text-shadow:0 0 40px #c084fc;}
+}
+
+@keyframes glitch{
+  0%{transform:translate(0);}
+  20%{transform:translate(-2px,2px);}
+  40%{transform:translate(-2px,-2px);}
+  60%{transform:translate(2px,2px);}
+  80%{transform:translate(2px,-2px);}
+  100%{transform:translate(0);}
+}
+
+@keyframes glitch2{
+  0%{transform:translate(0);}
+  25%{transform:translate(2px,-2px);}
+  50%{transform:translate(-2px,2px);}
+  75%{transform:translate(2px,2px);}
+  100%{transform:translate(0);}
+}
+
+/* SUBTEXT */
+.subtitle{
+  margin-top:20px;
+  font-size:18px;
+  color:#ddd;
+  opacity:0.8;
+}
+
+/* BUTTONS */
+.buttons{
+  margin-top:40px;
+}
+
+button{
+  margin:10px;
+  padding:15px 30px;
+  border:none;
+  border-radius:12px;
+  font-size:18px;
+  cursor:pointer;
+  background:linear-gradient(90deg,#7c3aed,#a855f7);
+  color:white;
+  box-shadow:0 0 15px rgba(168,85,247,0.6);
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px rgba(192,132,252,1);
+}
+
+/* NO BUTTON STYLE */
+.no{
+  background:transparent;
+  border:1px solid #7c3aed;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="container">
+  <div class="title">CLOUD ESCAPE ROOM</div>
+  <div class="subtitle">⚡ A system is under attack. Are you ready to escape?</div>
+
+  <div class="buttons">
+    <button onclick="startGame()">YES, START 🚀</button>
+    <button class="no" onclick="noGame()">NO 😅</button>
+  </div>
+</div>
+
+<audio id="bgMusic" src="https://assets.mixkit.co/active_storage/sfx/240/240-preview.mp3" loop></audio>
+
+<audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+
+<audio id="hoverSound" src="https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3"></audio>
+
+<audio id="glitchSound" src="https://assets.mixkit.co/active_storage/sfx/2540/2540-preview.mp3"></audio>
+
+<audio id="startSound" src="https://assets.mixkit.co/active_storage/sfx/2674/2674-preview.mp3"></audio>
+
+<script>
+const clickSound = document.getElementById("clickSound");
+const bgMusic = document.getElementById("bgMusic");
+
+/* PLAY BACKGROUND MUSIC */
+bgMusic.volume = 0.3;
+bgMusic.play();
+
+/* BUTTON ACTIONS */
+function startGame(){
+  clickSound.play();
+  setTimeout(()=>{
+    window.location.href="login.html";
+  },500);
+}
+
+function noGame(){
+  clickSound.play();
+  alert("😈 You can't escape that easily...");
+}
+
+/* PARTICLE BACKGROUND */
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<100;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2,
+    d:Math.random()*1
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle="#a855f7";
+  ctx.beginPath();
+
+  for(let i=0;i<particles.length;i++){
+    let p=particles[i];
+    ctx.moveTo(p.x,p.y);
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+  }
+
+  ctx.fill();
+  update();
+}
+
+function update(){
+  for(let i=0;i<particles.length;i++){
+    let p=particles[i];
+    p.y += p.d;
+    if(p.y > canvas.height){
+      p.y = 0;
+      p.x = Math.random()*canvas.width;
+    }
+  }
+}
+
+setInterval(draw,33);
+</script>
+
+</body>
+</html>

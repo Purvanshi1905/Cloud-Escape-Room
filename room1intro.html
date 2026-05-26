@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Entering Room 1</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: radial-gradient(circle,#140a28,#05010d);
+  font-family:"Segoe UI";
+  color:white;
+  overflow:hidden;
+}
+
+/* CONTAINER */
+.container{
+  text-align:center;
+  z-index:2;
+}
+
+/* TITLE */
+.title{
+  font-size:60px;
+  font-weight:bold;
+  color:#c084fc;
+  text-shadow:0 0 20px #a855f7,0 0 40px #7c3aed;
+  animation: glow 2s infinite alternate;
+}
+
+/* SUBTEXT */
+.subtitle{
+  margin-top:20px;
+  font-size:20px;
+  opacity:0.8;
+}
+
+/* BUTTON */
+button{
+  margin-top:40px;
+  padding:15px 40px;
+  border:none;
+  border-radius:12px;
+  font-size:18px;
+  cursor:pointer;
+  background:linear-gradient(90deg,#7c3aed,#a855f7);
+  color:white;
+  box-shadow:0 0 15px rgba(168,85,247,0.6);
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px rgba(192,132,252,1);
+}
+
+/* ANIMATION */
+@keyframes glow{
+  from{ text-shadow:0 0 10px #a855f7;}
+  to{ text-shadow:0 0 40px #c084fc;}
+}
+
+/* FADE */
+body{
+  animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="title">ROOM 1</div>
+  <div class="subtitle">🌐 Web System Activated</div>
+
+  <div class="subtitle">You are now entering the first secured zone...</div>
+
+  <button onclick="enterRoom()">🚪 Enter Room</button>
+</div>
+
+<!-- SOUNDS -->
+<audio id="enterSound" src="https://assets.mixkit.co/active_storage/sfx/2674/2674-preview.mp3"></audio>
+<audio id="glitch" src="https://assets.mixkit.co/active_storage/sfx/2540/2540-preview.mp3"></audio>
+
+<script>
+const enterSound = document.getElementById("enterSound");
+const glitch = document.getElementById("glitch");
+
+/* PLAY GLITCH ON LOAD */
+window.onload = ()=>{
+  glitch.volume = 0.6;
+  glitch.play();
+};
+
+/* ENTER ROOM */
+function enterRoom(){
+  enterSound.play();
+
+  document.body.style.transition="0.5s";
+  document.body.style.opacity="0";
+
+  setTimeout(()=>{
+    window.location.href="room1.html";
+  },700);
+}
+</script>
+
+</body>
+</html>

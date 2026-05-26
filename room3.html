@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Room 3</title>
+
+<style>
+body{margin:0;height:100vh;display:flex;justify-content:center;align-items:center;background:radial-gradient(circle,#0f0c29,#090116);font-family:"Segoe UI";color:white;}
+.card{width:520px;padding:35px;border-radius:20px;background:#140a28;border:1px solid #7c3aed;text-align:center;}
+input{width:100%;padding:12px;margin-top:15px;border-radius:10px;border:1px solid #7c3aed;background:#0b0420;color:white;}
+button{margin-top:15px;padding:12px;width:100%;border:none;border-radius:10px;background:#7c3aed;color:white;}
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#090116;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  color:#c084fc;
+  opacity:0;
+  transition:0.5s;
+
+  pointer-events:none; /* ✅ FIX */
+  z-index:10;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h2>💻 Code Recovery</h2>
+<p id="q"></p>
+<input id="a">
+<button onclick="check()">Unlock</button>
+<p id="m"></p>
+</div>
+
+<div id="overlay" class="overlay"></div>
+
+<audio id="correct" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
+<audio id="wrong" src="https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.mp3"></audio>
+<audio id="win" src="https://assets.mixkit.co/sfx/preview/mixkit-game-level-completed-2059.mp3"></audio>
+
+<script>
+let i=0;
+
+const qs=[
+ {q:"Q1. 2+2×2?",a:x=>x==="6"},
+ {q:"Q2. FIFO structure?",a:x=>x.includes("queue")},
+ {q:"Q3. LIFO structure?",a:x=>x.includes("stack")},
+ {q:"Q4. Loop keyword?",a:x=>x.includes("for")||x.includes("while")},
+ {q:"Q5. Index starts?",a:x=>x==="0"}
+];
+
+function load(){q.innerText=qs[i].q;a.value="";m.innerText="";}
+load();
+
+function check(){
+ let val=a.value.toLowerCase();
+ if(qs[i].a(val)){
+  correct.play();
+  show("🔓 Door "+(i+1)+" Unlocked");
+  i++;
+  setTimeout(()=>{if(i<qs.length)load();else finish();},1500);
+ }else{wrong.play();m.innerText="❌ Wrong";}
+}
+
+function show(text){
+  overlay.innerText = text;
+  overlay.style.opacity = 1;
+  overlay.style.pointerEvents = "auto";
+
+  setTimeout(()=>{
+    overlay.style.opacity = 0;
+    overlay.style.pointerEvents = "none";
+  },1200);
+}
+function finish(){win.play();show("🚪 Room 3 Completed");setTimeout(()=>location.href="room4intro.html",1500);}
+</script>
+
+</body>
+</html>

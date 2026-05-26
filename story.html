@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mission Brief</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Segoe UI";
+  background: radial-gradient(circle,#140a28,#05010d);
+  color:white;
+
+  /* FIX */
+  min-height:100vh;
+  overflow-y:auto;   /* allow scrolling */
+  padding:40px 20px;
+}
+/* CONTAINER */
+.container{
+  max-width:850px;
+  margin:auto;
+}
+
+/* TITLE */
+.title{
+  font-size:45px;
+  font-weight:bold;
+  color:#c084fc;
+  text-shadow:0 0 20px #a855f7;
+}
+
+/* CASE BOX */
+.case{
+  margin-top:25px;
+  background:#1a0933;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 0 20px rgba(168,85,247,0.5);
+  text-align:left;
+  line-height:1.7;
+}
+
+/* SUBTITLE */
+.subtitle{
+  margin-bottom:10px;
+  font-size:20px;
+  color:#c084fc;
+}
+
+/* BUTTON */
+.btn{
+  padding:18px 55px;
+  font-size:20px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:linear-gradient(90deg,#7c3aed,#c084fc);
+  color:white;
+  box-shadow:0 0 25px rgba(168,85,247,0.9);
+  transition:0.3s;
+  animation: pulseBtn 2s infinite;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+}
+
+.continue-text{
+  margin-top:12px;
+  font-size:14px;
+  color:#c084fc;
+  animation: pulseText 1.5s infinite;
+}
+
+@keyframes pulseBtn{
+  0%{ box-shadow:0 0 10px rgba(168,85,247,0.5);}
+  50%{ box-shadow:0 0 35px rgba(192,132,252,1);}
+  100%{ box-shadow:0 0 10px rgba(168,85,247,0.5);}
+}
+
+@keyframes pulseText{
+  0%{opacity:0.3;}
+  50%{opacity:1;}
+  100%{opacity:0.3;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="title">🧠 MISSION BRIEF</div>
+
+  <div class="case">
+
+    <div class="subtitle">📁 CASE STUDY: Cloud Security Breach</div>
+
+    A leading tech organization has reported a <b>critical breach</b> in their cloud infrastructure.<br><br>
+
+    Sensitive data is at risk, and multiple system layers have been compromised.<br><br>
+
+    ⚡ Your team has been selected as <b>elite problem solvers</b>.<br><br>
+
+    Each room represents a layer of cloud architecture:<br>
+    • Compute (EC2)<br>
+    • Storage (S3)<br>
+    • Security (IAM)<br>
+    • Cloud Core<br><br>
+
+    🔐 Solve challenges. Unlock layers. Escape the system.<br><br>
+
+    Failure is not an option.
+  </div>
+
+  
+
+  <div class="warning">⚠ SYSTEM LOCKDOWN ACTIVE</div>
+
+  <!-- BUTTON -->
+  <div style="margin-top:40px; text-align:center;">
+  <button onclick="goRoom1()" 
+    style="
+      padding:18px 55px;
+      font-size:20px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      background:linear-gradient(90deg,#7c3aed,#c084fc);
+      color:white;
+      box-shadow:0 0 25px rgba(168,85,247,0.9);
+      transition:0.3s;
+    "
+    onmouseover="this.style.transform='scale(1.1)'"
+    onmouseout="this.style.transform='scale(1)'"
+  >
+    🚀 ENTER ROOM 1
+  </button>
+</div>
+
+</div>
+
+<!-- SOUND -->
+<audio id="click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+
+<script>
+
+
+function goRoom1(){
+  document.body.style.opacity="0";
+  document.body.style.transition="0.5s";
+
+  setTimeout(()=>{
+    window.location.href="room1intro.html";
+  },500);
+}
+
+</script>
+
+</body>
+</html>
