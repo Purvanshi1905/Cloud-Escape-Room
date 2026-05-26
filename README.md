@@ -121,7 +121,7 @@ firebase.js
 
 Clone the repository:
 
-git clone https://github.com/YOUR_USERNAME/cloud-escape-room.git
+git clone https://github.com/Purvanshi1905/cloud-escape-room.git
 
 Open with VS Code Live Server or any local server.
 
